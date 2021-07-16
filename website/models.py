@@ -77,6 +77,7 @@ def file_size(value):  # add this to some file where you can import it from
 
 class pupuk(models.Model):
     nama_toko = models.CharField(max_length=50, verbose_name='Nama Toko')
+    alamat = models.TextField(blank=True, null=True)
     Latitude = models.FloatField(max_length=50, verbose_name='Latitude')
     Longitude = models.FloatField(max_length=50, verbose_name='Longitude')
     no_tlp = models.CharField(max_length=50,  verbose_name='Nomor Telpon')

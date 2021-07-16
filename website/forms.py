@@ -17,6 +17,7 @@ class PupukForm(forms.ModelForm):
         model = pupuk
         fields = [
             'nama_toko',
+            'alamat',
             'Latitude',
             'Longitude',
             'no_tlp',
