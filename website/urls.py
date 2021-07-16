@@ -13,7 +13,7 @@ router.register('pupuk', views.pupukViewSet, basename='api_pupuk')
 
 urlpatterns = [
     #user
-    path('home', views.index_user, name='home'),
+    path('', views.index_user, name='home'),
     path('user_lahan', views.user_lahan, name='user_lahan'),
     path('user_pupuk', views.user_pupuk, name='user_pupuk'),
     path('login/', views.CustomLoginView.as_view(), name='login'),

@@ -82,14 +82,14 @@ def user_pupuk(request):
     return render(request, 'user/pupuk.html', context)
 
 #dashboard
-@login_required(login_url='/home')
+@login_required(login_url='/')
 def index(request):
     #Data_siswa = data_siswa.objects.all()
     context = {
     }
     return render(request, 'dashboard/dashboard.html', context)
 
-@login_required(login_url='/home')
+@login_required(login_url='/')
 def show_lahan(request):
     Data_kab = kabupaten.objects.values()
     Data_lahan = lahan.objects.values()
@@ -101,7 +101,7 @@ def show_lahan(request):
     return render(request, 'dashboard/show_lahan.html', context)
 
 
-@login_required(login_url='/home')
+@login_required(login_url='/')
 def lahan_view(request):
     Data_lahan = lahan.objects.all()
     context = {
@@ -110,7 +110,7 @@ def lahan_view(request):
     return render(request, 'dashboard/lahan.html', context)
 
 
-@login_required(login_url='/home')
+@login_required(login_url='/')
 def add_lahan(request):
     if request.method == 'POST':
         form = LahanForm(request.POST, request.FILES)
@@ -125,7 +125,7 @@ def add_lahan(request):
     return render(request, 'dashboard/forms.html', context)
 
 
-@login_required(login_url='/home')
+@login_required(login_url='/')
 def update_lahan(request, pk):
 
     Data_lahan = lahan.objects.get(id=pk)
@@ -144,13 +144,13 @@ def update_lahan(request, pk):
     return render(request, 'dashboard/forms.html', context)
 
 
-@login_required(login_url='/home')
+@login_required(login_url='/')
 def Delete_lahan(request, pk):
     Data_lahan = lahan.objects.get(id=pk)
     Data_lahan.delete()
     return redirect('lahan_view')
 
-@login_required(login_url='/home')
+@login_required(login_url='/')
 def show_pupuk(request):
     Data_pupuk = pupuk.objects.values()
     Data_pupuk = list(Data_pupuk)
@@ -160,7 +160,7 @@ def show_pupuk(request):
     return render(request, 'dashboard/show_pupuk.html', context)
 
 
-@login_required(login_url='/home')
+@login_required(login_url='/')
 def pupuk_view(request):
     Data_pupuk = pupuk.objects.all()
     context = {
@@ -169,7 +169,7 @@ def pupuk_view(request):
     return render(request, 'dashboard/pupuk.html', context)
 
 
-@login_required(login_url='/home')
+@login_required(login_url='/')
 def add_pupuk(request):
     if request.method == 'POST':
         form = PupukForm(request.POST)
@@ -184,7 +184,7 @@ def add_pupuk(request):
     return render(request, 'dashboard/forms.html', context)
 
 
-@login_required(login_url='/home')
+@login_required(login_url='/')
 def update_pupuk(request, pk):
     
     Data_pupuk = pupuk.objects.get(id=pk)
@@ -203,7 +203,7 @@ def update_pupuk(request, pk):
     return render(request, 'dashboard/forms.html', context)
 
 
-@login_required(login_url='/home')
+@login_required(login_url='/')
 def Delete_pupuk(request, pk):
     Data_pupuk = pupuk.objects.get(id=pk)
     Data_pupuk.delete()
