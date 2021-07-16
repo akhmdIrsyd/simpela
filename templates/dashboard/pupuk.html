@@ -1,0 +1,64 @@
+    {% extends 'dashboard/base.html' %}
+                {% block link %}
+                <ol class="breadcrumb float-sm-right">
+                <li class="breadcrumb-item">Home</a></li>
+                <li class="breadcrumb-item "> Manage Data Pemetaan</li>
+                <li class="breadcrumb-item active">Toko Pupuk</li>
+                </ol>
+              {% endblock %}
+    {% block body %}
+<section class="content">
+
+        <!-- /.card-header -->
+        <div class="container-fluid">
+          <div class="card">
+            <div class="card-header">
+              <!-- /.card-header -->
+              <div class="card-body">
+                <table id="tblData" class="table table-bordered table-striped" border="1">
+                  <thead style="text-align:center">
+                    <tr>
+                      <th>No </th>
+                      <th> Nama Toko </th>
+                      <th> Kontak Info </th>
+                      <th> Latitude </th>
+                      <th> Longitude </th>
+                      <th width="10%"> Action </th>
+                    </tr>
+                  </thead>
+                  <tbody id="ready">
+                    {% for row in rows %}
+                    <tr>
+                        <td style="text-align:center" width="5%"> {{ forloop.counter }}</td>
+                        <td>{{ row.nama_toko }}</td>
+                        <td>{{ row.no_tlp}}</td>
+                        <td>{{ row.Latitude }}</td>
+                        <td>{{ row.Longitude }}</td>
+                        <td width="15%" style="text-align:center">
+                        <a href="{% url 'update_pupuk' pk=row.pk %}" id = '{{row.pk}}'><button  class="btn bg-yellow" type="button" name="button">
+                                                 <i class="fa fa-edit border-bottom"></i></button></a>
+                        <a href="{% url 'Delete_pupuk' pk=row.pk %}" id = '{{row.pk}}'><button class="btn bg-red" type="button" name="button">
+                                                 <i class="fa fa-trash border-bottom"></i></button></a>
+                        </td>
+
+
+
+                     </tr>
+                     {% endfor %}
+                  </tbody>
+                  <tfoot>
+                  </tfoot>
+                </table>
+              </div>
+              <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+          </div>
+          <!-- /.col -->
+        </div>
+        <!-- /.row -->
+    </div>
+  </div>
+  <!-- /.container-fluid -->
+  </section>
+  {% endblock %}

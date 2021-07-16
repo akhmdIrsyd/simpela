@@ -1,0 +1,63 @@
+    {% extends 'dashboard/base.html' %}
+    {% block body %}
+<section class="content">
+
+        <!-- /.card-header -->
+        <div class="container-fluid">
+          <div class="card">
+            <div class="card-header">
+              <div class="row">
+                <h3 class="card-title"> Manage Data</h3>
+
+              </div>
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body">
+
+{% load widget_tweaks %}
+<form method="post" action="" enctype="multipart/form-data">
+  {% csrf_token %}
+
+
+  <div class="modal-body">
+
+    <div class="{% if form.non_field_errors %}invalid{% endif %} mb-2">
+      {% for error in form.non_field_errors %}
+        {{ error }}
+      {% endfor %}
+    </div>
+
+    {% for field in form %}
+      <div class="form-group">
+        <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+        {% render_field field class="form-control" placeholder=field.label %}
+        <div class="{% if field.errors %} invalid{% endif %}">
+          {% for error in field.errors %}
+            <p class="help-block">{{ error }}</p>
+          {% endfor %}
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+
+  <div class="modal-footer">
+  <!-- da ngebug -->
+    <!-- <button onclick="goBack()" class="submit-btn btn ">Go Back</button> -->
+    <button type="submit" class="submit-btn btn btn-primary">Simpan</button>
+
+<script>
+function goBack() {
+  window.history.back();
+}
+</script>
+  </div>
+
+
+
+</div>
+</form>
+</div>
+  </div>
+  <!-- /.container-fluid -->
+  </section>
+  {% endblock %}

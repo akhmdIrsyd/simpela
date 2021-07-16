@@ -1,0 +1,140 @@
+    {% extends 'dashboard/base.html' %}
+    {% load static %}
+    {% block link %}
+    <ol class="breadcrumb float-sm-right">
+      <li class="breadcrumb-item">Home</a></li>
+      <li class="breadcrumb-item "> Data Pemetaan</li>
+      <li class="breadcrumb-item active">Lahan Sawah</li>
+    </ol>
+    {% endblock %}
+    {% block head %}
+    <!-- Leaflet -->
+    <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet-src.js"></script>
+    <script src="https://unpkg.com/leaflet-ui@0.4.5/dist/leaflet-ui-src.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+      integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+      crossorigin="" />
+    <script src=" {% static 'dist/dashboard/leaflet-kmz-src.js' %}"></script>
+    <!-- <script src=" {% static 'js/fetchApi.js' %}"></script> -->
+
+    <style>
+      html,
+      body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+
+      .map {
+        /* margin: 0;
+        padding: 0; */
+        /* width: 1200px; */
+        /* height: 100%; */
+        /* width: 1200px; */
+        height: 600px;
+      }
+    </style>
+    {% endblock %}
+
+    {% block body %}
+    <section class="content">
+
+      <!-- /.card-header -->
+      <div class="container-fluid">
+        <div class="card">
+
+          <div class="card-header">
+
+
+            <select id="select">
+              <option disabled selected> Kabupaten </option>
+              {% for row in rows %}
+              <option id='{{ row.id }}' value="{{ row.id}}"> {{ row.nama_kab }} </option>
+
+              {% endfor %}
+            </select>
+          </div>
+
+          <!-- /.card-header -->
+          <div class="card-body">
+            <!-- // mapnya anjg -->
+            <div id="map" class="map"></div>
+            <script>
+             
+              var map = {};
+
+              function createMap() {
+                map = L.map('map', {
+                  center: [-4.00009925001936, 122.5142745973001],
+                  zoom: 9,
+                  mapTypeId: 'satellite',
+                  mapTypeIds: ['streets', 'satellite', 'topo'],
+                  gestureHandling: false,
+                  searchControl: false,
+                  locateControl: false,
+                  pegmanControl: false,
+                  fullscreenControl: true,
+                  minimapControl: false,
+                  preferCanvas: false,
+                  trackResize: true,
+                  attributeControl: false,
+                  minZoom: 11,
+                  maxZoom: 17,
+                  visualClick: false,
+                  //disableDefaultUI: false,
+                  //layersControl: false,
+                  plugins: [
+                    "@raruto/leaflet-elevation@1.3.x/dist/leaflet-elevation.css",
+                    "@raruto/leaflet-elevation@1.3.x/dist/leaflet-elevation.js"
+                  ]
+                });
+              };
+              // Instantiate KMZ parser (async)
+              createMap();
+              var kmz = L.kmzLayer();
+              var control = L.control.layers(null, null, {
+                collapsed: true,
+              }).addTo(map);
+              kmz.on('load', function (e) {
+                control.addOverlay(e.layer, e.name).addTo(map);
+              });
+
+              $(document).ready(function () {
+                $('#select').change(function () {
+                  map.remove();
+                  createMap();
+
+                  var id_kab = $("select").val();
+                  control.initialize(null, null, "load");
+                  kmz.initialize();
+                  map.removeControl(control);
+
+                  // console.log(map);
+                  $.ajax({
+                    url: "http://127.0.0.1:8000/api/lahan/?id_kab=" + id_kab,
+                    contentType: "application/json",
+                    dataType: "json",
+                    success: function (result) {
+                      result.forEach(field => {
+                        console.log(result.length);
+                        kmz.add(field.nama_file);
+                        console.log(field.nama_file);
+                      });
+                    }
+                  });
+                });
+              });
+            </script>
+          </div>
+          <!-- /.card-body -->
+        </div>
+        <!-- /.card -->
+      </div>
+      <!-- /.col -->
+      </div>
+      <!-- /.row -->
+      </div>
+      </div>
+      <!-- /.container-fluid -->
+    </section>
+    {% endblock %}

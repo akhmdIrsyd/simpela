@@ -1,0 +1,12 @@
+api pupuk (koordinat toko pupuk)
+http://127.0.0.1:8000/api/pupuk
+filter berdasarkan nama
+http://127.0.0.1:8000/api/pupuk/?nama_toko=nama toko
+
+api pupuk (file kmz)
+http://127.0.0.1:8000/api/lahan
+filter berdasarkan id kabupaten
+http://127.0.0.1:8000/api/pupuk/?id_kab= id_kab
+filter berdasarkan nama kabupaten
+http://127.0.0.1:8000/api/pupuk/?nama_kab= nama_kab
+

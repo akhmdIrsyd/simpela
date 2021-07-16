@@ -1,0 +1,151 @@
+{% extends 'user/base.html' %}
+{% load static %}
+{% block head %}
+<script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet-src.js"></script>
+  <script src="https://unpkg.com/leaflet-ui@0.4.5/dist/leaflet-ui-src.js"></script>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+  integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+  crossorigin="" />
+  <script src=" {% static 'dist/dashboard/leaflet-kmz-src.js' %}"></script>
+  <script src=" {% static 'js/fetchApi.js' %}"></script>
+ 
+  <style>
+    html,
+    body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+    }
+
+    .map {
+      /* margin: 0;
+        padding: 0; */
+      /* width: 1200px; */
+      /* height: 100%; */
+      /* width: 1200px; */
+      height: 600px;
+    }
+
+  </style>
+{% endblock head %}
+{% block body %}
+    </section>
+    <section class="py-1" id="Opportuanities">
+      <div class="bg-holder d-none d-sm-block"
+        style="background-image:url(../../static/asset/user/img/illustrations/bg.png);background-position:top left;background-size:225px 755px;margin-top:-17.5rem;">
+      </div>
+      <!--/.bg-holder-->
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12 text-center">
+            <h5 class="fw-bold fs-3 fs-lg-5 lh-sm mb-3"> </br> </br> </br> Toko - Toko Penyedia Pupuk</h5>
+
+          </div>
+        </div>
+       
+
+        
+            <div class="col-md-12">
+              <div id="map" class="map"></div>
+              
+              <script>
+                const datas = {{data|safe}};
+                console.log((datas));
+                console.log((datas[1]));
+                
+                
+
+                var map = L.map('map', {
+                  center: [-4.00009925001936, 122.5142745973001],
+                  zoom: 10,
+                  mapTypeId: 'satellite',
+                  mapTypeIds: ['streets', 'satellite'],
+                  gestureHandling: false,
+                  searchControl: false,
+                  locateControl: true,
+                  pegmanControl: false,
+                  fullscreenControl: false,
+                  minimapControl: false,
+                  preferCanvas: false,
+                  trackResize: true,
+                  attributeControl: false,
+                  minZoom: 10,
+                  maxZoom: 17,
+                  visualClick: false,
+                  //disableDefaultUI: false,
+                  layersControl: false,
+                  
+                  plugins: [
+                    "@raruto/leaflet-elevation@1.3.x/dist/leaflet-elevation.css",
+                    "@raruto/leaflet-elevation@1.3.x/dist/leaflet-elevation.js"
+                  ]
+                });
+
+                // Instantiate KMZ parser (async)
+                var kmz = L.kmzLayer(null, {
+                  // geometryToLayer: function(data, xml) {
+                  // 	let layer = this._geometryToLayer(data, xml);
+                  // 	let el = xml.getElementsByTagName('GroundOverlay');
+                  // 	for (let k = 0; k < el.length; k++) {
+                  // 		l = _.parseGroundOverlay(el[k], data.properties);
+                  // 		if (l) {
+                  // 			layer.addLayer(l);
+                  // 		}
+                  // 	}
+                  // 	return layer;
+                  // }
+                }).addTo(map);
+
+                kmz.on('load', function (e) {
+                  // control.addOverlay(e.layer, e.name);
+                  e.layer.addTo(map);
+                });
+
+                // marker nya
+                // var marker = L.marker([-3.9922560617994294, 122.5142054096418]).addTo(map)
+                //   .bindPopup("<b>Toko Putri Tani</b><br /> 08212xxxx").openPopup();
+
+viewPupuk();
+
+                // kmz.add('../examples/regions.kmz');
+                // kmz.add('../examples/capitals.kmz');
+                // kmz.add('../examples/globe.kmz');
+                // kmz.add('../examples/multigeometry.kmz');
+                // kmz.add('../examples/etna.kmz');
+
+
+
+                // var controlElevation;
+
+                // map.on('plugins_loaded', function() {
+                //
+                // 	controlElevation = L.control.elevation(opts.elevationControl.options);
+                // 	var controlLayer = L.control.layers(null, null, opts.layersControl.options);
+                //
+                // 	controlElevation.addTo(map);
+                // 	controlLayer.addTo(map);
+                //
+                // 	controlElevation.on('eledata_loaded', function(e) {
+                // 		controlLayer.addOverlay(e.layer, e.name);
+                // 	});
+                //
+                // 	controlElevation.load(opts.elevationControl.url);
+                //
+                // });
+
+
+
+                // Model Di Kanan Atas Utk Display Semua KMZ yang ada
+
+                // var control = L.control.layers(null, null, {
+                // 	collapsed: false
+                // }).addTo(map);
+
+              </script>
+
+
+          </div>
+      </div>
+ 
+    </section>
+{% endblock body %}
