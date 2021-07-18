@@ -2,14 +2,12 @@ from django.views.decorators.csrf import csrf_protect
 from django.contrib.auth import login, authenticate, logout
 from django.shortcuts import render, redirect, HttpResponse
 
-from .forms import PupukForm, LahanForm, CustomAuthenticationForm
+from .forms import PupukForm, LahanForm
 from .models import pupuk,User,lahan,kabupaten
 
 from django.core import serializers
 # Create your views here.
 
-from django.urls import reverse_lazy
-from bootstrap_modal_forms.generic import BSModalLoginView
 
 from django.views import generic
 
@@ -27,11 +25,22 @@ from .filter import LahanFilter, PupukFilter
 from django_filters import rest_framework as filters
 
 
-class CustomLoginView(BSModalLoginView):
-    authentication_form = CustomAuthenticationForm
-    template_name = 'user/form_modal.html'
-    success_message = 'Success: You were successfully logged in.'
-    extra_context = dict(success_url=reverse_lazy('dashboard'))
+@csrf_protect
+def Login(request):
+    if (request.method == 'POST'):
+        email = request.POST.get('email')  # Get email value from form
+        password = request.POST.get('password')  # Get password value from form
+        user = authenticate(email=email, password=password)
+
+        if user is not None:
+            login(request, user)
+            if user.is_authenticated:
+                return redirect('dashboard')  
+        else:
+            # Invalid email or password. Handle as you wish
+            return redirect('login')
+
+    return render(request, 'user/login.html')
 
 def Logout(request):
     logout(request)
