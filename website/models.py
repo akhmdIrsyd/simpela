@@ -101,7 +101,7 @@ class lahan(models.Model):
     nama_file = models.FileField(upload_to=_upload_path, blank=True, null=True, validators=[FileExtensionValidator(['kmz']), file_size])
 
     def get_upload_path(self, filename):
-        return str("lahan"/+self.id_kab.nama_kab)+"/"+filename
+        return str("lahan/")+str(self.id_kab.nama_kab)+"/"+filename
     def __str__(self):
         return str(self.id_kab)
 
@@ -111,6 +111,6 @@ class irigasi(models.Model):
     nama_file = models.FileField(upload_to=_upload_path, blank=True, null=True, validators=[FileExtensionValidator(['kmz']), file_size])
 
     def get_upload_path(self, filename):
-        return str("irigasi"/+self.id_kab.nama_kab)+"/"+filename
+        return str("irigasi/")+str(self.id_kab.nama_kab)+"/"+filename
     def __str__(self):
         return str(self.id_kab)
