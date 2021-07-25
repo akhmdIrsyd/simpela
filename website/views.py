@@ -2,8 +2,8 @@ from django.views.decorators.csrf import csrf_protect
 from django.contrib.auth import login, authenticate, logout
 from django.shortcuts import render, redirect, HttpResponse
 
-from .forms import PupukForm, LahanForm
-from .models import pupuk,User,lahan,kabupaten
+from .forms import PupukForm, LahanForm, IrigasiForm
+from .models import pupuk,User,lahan,kabupaten, irigasi
 
 from django.core import serializers
 # Create your views here.
@@ -19,9 +19,9 @@ from django.views.decorators.csrf import csrf_protect
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required, permission_required
 
-from .serializerss import LahanSerializer,PupukSerializer
+from .serializerss import LahanSerializer,PupukSerializer,IrigasiSerializer
 from rest_framework import routers, serializers, viewsets
-from .filter import LahanFilter, PupukFilter
+from .filter import LahanFilter, PupukFilter, IrigasiFilter
 from django_filters import rest_framework as filters
 
 
@@ -64,6 +64,14 @@ class pupukViewSet(viewsets.ModelViewSet):
     filter_backends = (filters.DjangoFilterBackend,)
     filter_class = PupukFilter
 
+class IrigasiViewSet(viewsets.ModelViewSet):
+    queryset = irigasi.objects.all()
+    serializer_class = IrigasiSerializer
+
+    filter_backends = (filters.DjangoFilterBackend,)
+    filter_class = IrigasiFilter
+
+
 
 def index_user(request):
     #Data_siswa = data_siswa.objects.all()
@@ -89,6 +97,18 @@ def user_pupuk(request):
         'data': Data_pupuk,
     }
     return render(request, 'user/pupuk.html', context)
+
+def user_irigasi(request):
+    Data_kab = kabupaten.objects.values()
+    Data_irigasi = irigasi.objects.values()
+    Data_irigasi = list(Data_irigasi)
+    context = {
+        'data': Data_irigasi,
+        'rows': Data_kab,
+    }
+    return render(request, 'user/irigasi.html', context)
+
+
 
 #dashboard
 @login_required(login_url='/')
@@ -159,6 +179,70 @@ def Delete_lahan(request, pk):
     Data_lahan.delete()
     return redirect('lahan_view')
 
+# Perkontolan
+
+@login_required(login_url='/')
+def show_irigasi(request):
+    Data_kab = kabupaten.objects.values()
+    Data_irigasi = irigasi.objects.values()
+    Data_irigasi = list(Data_irigasi)
+    context = {
+        'data': Data_irigasi,
+        'rows': Data_kab,
+    }
+    return render(request, 'dashboard/show_irigasi.html', context)
+
+
+@login_required(login_url='/')
+def irigasi_view(request):
+    Data_irigasi = irigasi.objects.all()
+    context = {
+        'rows': Data_irigasi,
+    }
+    return render(request, 'dashboard/irigasi.html', context)
+
+
+@login_required(login_url='/')
+def add_irigasi(request):
+    if request.method == 'POST':
+        form = IrigasiForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('irigasi_view')
+    else:
+        form = IrigasiForm()
+    context = {
+        'form': form
+    }
+    return render(request, 'dashboard/forms.html', context)
+
+
+@login_required(login_url='/')
+def update_irigasi(request, pk):
+
+    Data_irigasi = irigasi.objects.get(id=pk)
+    if request.method == 'POST':
+        form = IrigasiForm(
+            request.POST, request.FILES, instance=Data_irigasi)
+        if form.is_valid():
+            form.save()
+            return redirect('irigasi_view')
+    else:
+        form = IrigasiForm(instance=Data_irigasi)
+    context = {
+        'form': form,
+        'rows': Data_irigasi
+    }
+    return render(request, 'dashboard/forms.html', context)
+
+
+@login_required(login_url='/')
+def Delete_irigasi(request, pk):
+    Data_irigasi = irigasi.objects.get(id=pk)
+    Data_irigasi.delete()
+    return redirect('irigasi_view')
+
+# perkontolan end
 @login_required(login_url='/')
 def show_pupuk(request):
     Data_pupuk = pupuk.objects.values()

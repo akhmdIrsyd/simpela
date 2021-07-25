@@ -1,6 +1,6 @@
 # serializers
 from rest_framework import serializers
-from .models import pupuk,lahan,kabupaten
+from .models import pupuk,lahan,kabupaten,irigasi
 
 class KabSerializer(serializers.ModelSerializer):
     class Meta:
@@ -20,5 +20,12 @@ class LahanSerializer(serializers.ModelSerializer):
         model = lahan
         fields = '__all__'
 
+
+class IrigasiSerializer(serializers.ModelSerializer):
+    #id_kabupaten = KabSerializer(source='id_kab', read_only=True)
+    nama_kab = serializers.CharField(source='id_kab.nama_kab', read_only=True)
+    class Meta:
+        model = irigasi
+        fields = '__all__'
 
 

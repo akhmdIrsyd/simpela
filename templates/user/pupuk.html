@@ -47,9 +47,7 @@
         
             <div class="col-md-12">
               <div id="map" class="map"></div>
-              
               <script>
-
                 var map = L.map('map', {
                   center: [-4.00009925001936, 122.5142745973001],
                   zoom: 10,
@@ -69,7 +67,6 @@
                   visualClick: false,
                   //disableDefaultUI: false,
                   layersControl: false,
-                  
                   plugins: [
                     "@raruto/leaflet-elevation@1.3.x/dist/leaflet-elevation.css",
                     "@raruto/leaflet-elevation@1.3.x/dist/leaflet-elevation.js"
@@ -78,17 +75,7 @@
 
                 // Instantiate KMZ parser (async)
                 var kmz = L.kmzLayer(null, {
-                  // geometryToLayer: function(data, xml) {
-                  // 	let layer = this._geometryToLayer(data, xml);
-                  // 	let el = xml.getElementsByTagName('GroundOverlay');
-                  // 	for (let k = 0; k < el.length; k++) {
-                  // 		l = _.parseGroundOverlay(el[k], data.properties);
-                  // 		if (l) {
-                  // 			layer.addLayer(l);
-                  // 		}
-                  // 	}
-                  // 	return layer;
-                  // }
+             
                 }).addTo(map);
 
                 kmz.on('load', function (e) {
@@ -96,51 +83,12 @@
                   e.layer.addTo(map);
                 });
 
-                // marker nya
-                // var marker = L.marker([-3.9922560617994294, 122.5142054096418]).addTo(map)
-                //   .bindPopup("<b>Toko Putri Tani</b><br /> 08212xxxx").openPopup();
 
-viewPupuk();
+                viewPupuk();
 
-                // kmz.add('../examples/regions.kmz');
-                // kmz.add('../examples/capitals.kmz');
-                // kmz.add('../examples/globe.kmz');
-                // kmz.add('../examples/multigeometry.kmz');
-                // kmz.add('../examples/etna.kmz');
-
-
-
-                // var controlElevation;
-
-                // map.on('plugins_loaded', function() {
-                //
-                // 	controlElevation = L.control.elevation(opts.elevationControl.options);
-                // 	var controlLayer = L.control.layers(null, null, opts.layersControl.options);
-                //
-                // 	controlElevation.addTo(map);
-                // 	controlLayer.addTo(map);
-                //
-                // 	controlElevation.on('eledata_loaded', function(e) {
-                // 		controlLayer.addOverlay(e.layer, e.name);
-                // 	});
-                //
-                // 	controlElevation.load(opts.elevationControl.url);
-                //
-                // });
-
-
-
-                // Model Di Kanan Atas Utk Display Semua KMZ yang ada
-
-                // var control = L.control.layers(null, null, {
-                // 	collapsed: false
-                // }).addTo(map);
-
+               
               </script>
-
-
           </div>
       </div>
- 
     </section>
 {% endblock body %}

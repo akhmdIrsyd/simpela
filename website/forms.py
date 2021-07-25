@@ -1,5 +1,5 @@
 from django import forms
-from .models import pupuk, lahan, User
+from .models import pupuk, lahan, User, irigasi
 from django.contrib.auth.forms import UserCreationForm
 
 from django.contrib.auth.forms import AuthenticationForm
@@ -29,6 +29,15 @@ class LahanForm(forms.ModelForm):
 
     class Meta:
         model = lahan
+        fields = [
+            'id_kab',
+            'nama_file',
+        ]
+
+class IrigasiForm(forms.ModelForm):
+
+    class Meta:
+        model = irigasi
         fields = [
             'id_kab',
             'nama_file',

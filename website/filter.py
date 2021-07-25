@@ -1,5 +1,5 @@
 import django_filters
-from .models import lahan, pupuk, kabupaten
+from .models import lahan, pupuk, kabupaten, irigasi
 from django_filters import rest_framework as filters
 
 
@@ -18,3 +18,13 @@ class PupukFilter(django_filters.FilterSet):
     class Meta():
         model = pupuk
         fields = ['nama_toko']
+
+class IrigasiFilter(django_filters.FilterSet):
+    id_kab = filters.NumberFilter(field_name='id_kab', lookup_expr='exact')
+    nama_kab = filters.CharFilter(field_name='id_kab__nama_kab', lookup_expr='contains')
+
+    class Meta():
+        model = irigasi
+        fields = ['id_kab', 'nama_kab']
+
+        
