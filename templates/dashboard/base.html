@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>GIS info PSP</title>
+  <title>GESINFO-PSP Dashboard</title>
   <link rel="icon" type="image/png" href="{% static 'asset/images/icons/favicon.ico' %}" />
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet"
@@ -41,9 +41,9 @@
     </nav>
     <aside class="main-sidebar sidebar-dark-primary elevation-4">
       <!-- Brand Logo -->
-      <a href="index.html" class="brand-link">
+      <a href="{% url 'dashboard' %}" class="brand-link">
         <img src="{% static 'dist/img/logox.png' %}" alt="AdminLTE Logo" class="brand-image img-circle " style="opacity: .8">
-        <span class="brand-text font-weight-light">GIS info PSP</span>
+        <span class="brand-text font-weight-light">GESINFO-PSP</span>
       </a>
 
       <!-- Sidebar -->
@@ -95,6 +95,12 @@
                     <p>Toko Pupuk</p>
                   </a>
                 </li>
+                <li class="nav-item">
+                  <a href="{% url 'show_irigasi' %}" class="nav-link ">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Irigasi</p>
+                  </a>
+                </li>
               </ul>
             </li>
             <li class="nav-item ">
@@ -118,6 +124,12 @@
                     <p> Data Toko Pupuk</p>
                   </a>
                 </li>
+                <li class="nav-item">
+                  <a href="{% url 'irigasi_view' %}" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p> Data Irigasi</p>
+                  </a>
+                </li>
               </ul>
             </li>
             <li class="nav-item">
@@ -139,6 +151,12 @@
                   <a href="{% url 'add_pupuk' %}" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
                     <p> Upload Toko Pupuk</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="{% url 'add_pupuk' %}" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p> Upload Data Irigasi</p>
                   </a>
                 </li>
               </ul>
