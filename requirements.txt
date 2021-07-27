@@ -20,7 +20,6 @@ django-widget-tweaks==1.4.8
 djangorestframework==3.12.2
 djangorestframework-simplejwt==4.6.0
 et-xmlfile==1.0.1
-face-recognition-models==0.3.0
 geographiclib==1.50
 geopy==2.1.0
 gunicorn==20.0.4
