@@ -29,7 +29,7 @@ DEBUG = True
 
 AUTH_USER_MODEL = 'website.User'
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*','127.0.0.1','localhost','gisinfopspsultra.com','www.gisinfopspsultra.com']
 
 
 # Application definition
