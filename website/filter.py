@@ -27,4 +27,11 @@ class IrigasiFilter(django_filters.FilterSet):
         model = irigasi
         fields = ['id_kab', 'nama_kab']
 
+
+class KabupatenFilter(django_filters.FilterSet):
+    id = filters.NumberFilter(field_name='id', lookup_expr='exact')
+  
         
+class Meta():
+        model = kabupaten
+        fields = ['id']

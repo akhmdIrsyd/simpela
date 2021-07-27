@@ -11,6 +11,8 @@ router = routers.DefaultRouter()
 router.register('lahan', views.lahanViewSet, basename='api_lahan')
 router.register('pupuk', views.pupukViewSet, basename='api_pupuk')
 router.register('irigasi', views.IrigasiViewSet, basename='api_irigasi')
+router.register('kabupaten', views.KabupatenViewSet, basename='api_kabupaten')
+
 
 
 urlpatterns = [

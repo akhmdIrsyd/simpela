@@ -19,9 +19,9 @@ from django.views.decorators.csrf import csrf_protect
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required, permission_required
 
-from .serializerss import LahanSerializer,PupukSerializer,IrigasiSerializer
+from .serializerss import LahanSerializer,PupukSerializer,IrigasiSerializer,KabSerializer
 from rest_framework import routers, serializers, viewsets
-from .filter import LahanFilter, PupukFilter, IrigasiFilter
+from .filter import LahanFilter, PupukFilter, IrigasiFilter,KabupatenFilter
 from django_filters import rest_framework as filters
 
 
@@ -71,6 +71,12 @@ class IrigasiViewSet(viewsets.ModelViewSet):
     filter_backends = (filters.DjangoFilterBackend,)
     filter_class = IrigasiFilter
 
+class KabupatenViewSet(viewsets.ModelViewSet):
+    queryset = kabupaten.objects.all()
+    serializer_class = KabSerializer
+
+    filter_backends = (filters.DjangoFilterBackend,)
+    filter_class = KabupatenFilter
 
 
 def index_user(request):

@@ -122,6 +122,16 @@
                       });
                     }
                   });
+                  $.ajax({
+                    url: "http://127.0.0.1:8000/api/kabupaten/?id=" + id_kab,
+                    contentType: "application/json",
+                    dataType: "json",
+                    success: function (zoom) {
+                      zoom.forEach(vars => {
+                        map.setView({lat:vars.Latitude, lng:vars.Longitude},11);
+                      });
+                    }
+                  });
                 });
               });
             </script>

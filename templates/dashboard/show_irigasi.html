@@ -108,10 +108,10 @@
                   control.initialize(null, null, "load");
                   kmz.initialize();
                   map.removeControl(control);
-
+                  console.id_kab
                   // console.log(map);
                   $.ajax({
-                    url: "http://127.0.0.1:8000/api/lahan/?id_kab=" + id_kab,
+                    url: "http://127.0.0.1:8000/api/irigasi/?id_kab=" + id_kab,
                     contentType: "application/json",
                     dataType: "json",
                     success: function (result) {
@@ -119,6 +119,17 @@
                         console.log(result.length);
                         kmz.add(field.nama_file);
                         console.log(field.nama_file);
+                      });
+                    }
+                  });
+                  console.log(id_kab);
+                  $.ajax({
+                    url: "http://127.0.0.1:8000/api/kabupaten/?id=" + id_kab,
+                    contentType: "application/json",
+                    dataType: "json",
+                    success: function (zoom) {
+                      zoom.forEach(vars => {
+                        map.setView({lat:vars.Latitude, lng:vars.Longitude},11);
                       });
                     }
                   });

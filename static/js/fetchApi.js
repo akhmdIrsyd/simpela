@@ -46,4 +46,24 @@ async function getLahan(){
   }
  
 
-  
+  async function getIrigasi(){
+    let url = "http://127.0.0.1:8000/api/irigasi/";
+    try {
+     let res = await fetch(url);
+     return await res.json();
+    }catch (error){
+    console.log(error);
+   }
+  }
+
+
+  async function viewIrigasi(){
+    let irigasi = await getIrigasi();
+    console.log(irigasi);
+    irigasi.forEach(perairan => {
+      kmz.load(perairan.nama_file);
+      console.log(perairan.nama_file);
+     
+    });
+    // location.reload();
+  }
