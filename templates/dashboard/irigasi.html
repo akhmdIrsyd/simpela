@@ -44,9 +44,9 @@
                         <td style="text-align:center">  <a href="{{ row.nama_file.url}}" download="{{ row.nama_file.url}}" ><button  class="btn bg-blue" type="button" name="button">
                           <i class="fa fa-download border-bottom"></i></button></a>  </td>
                         <td style="text-align:center">
-                        <a href="{% url 'update_lahan' pk=row.pk %}" id = '{{row.pk}}'><button  class="btn bg-yellow" type="button" name="button">
+                        <a href="{% url 'update_irigasi' pk=row.pk %}" id = '{{row.pk}}'><button  class="btn bg-yellow" type="button" name="button">
                                                  <i class="fa fa-edit border-bottom"></i></button></a>
-                        <a href="{% url 'Delete_lahan' pk=row.pk %}" id = '{{row.pk}}'><button class="btn bg-red" type="button" name="button">
+                        <a href="{% url 'Delete_irigasi' pk=row.pk %}" id = '{{row.pk}}'><button class="btn bg-red" type="button" name="button">
                                                  <i class="fa fa-trash border-bottom"></i></button></a>
                         </td>
 
